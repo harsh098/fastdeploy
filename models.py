@@ -46,6 +46,7 @@ class DNSRecord(BaseModel):
 
 class EnvironmentConfig(BaseModel):
     ec2_host: str
+    branch: str
     dns: Optional[List[DNSRecord]] = []
 
 

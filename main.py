@@ -22,13 +22,18 @@ def build_onboarding_payload(data: ServiceList):
     output = {}
     for svc in data.services:
         output[svc.name] = {}
+        output[svc.name]["repo"] = svc.repo
+        output[svc.name]["environments"] = dict()
         for env_name, env_cfg in svc.environments.items():
-            output[svc.name]["environments"] = dict()
             output[svc.name]["environments"][env_name] = dict()
+            output[svc.name]["environments"][env_name][
+                "branch"
+            ] = env_cfg.branch
             if env_cfg.dns:
-                output[svc.name]["environments"][env_name] = {
-                    "dns": [record.model_dump() for record in env_cfg.dns]
-                }
+                output[svc.name]["environments"][env_name]["dns"] = [
+                    record.model_dump() for record in env_cfg.dns
+                ]
+
     return output
 
 

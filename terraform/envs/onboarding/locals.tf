@@ -15,4 +15,15 @@ locals {
     ]
   ])
   zone_id = var.cloudflare_zone_id
+
+  service_envs = {
+        for service_name, service in var.services: service_name => {
+            repository = service.repo
+            environments = {
+                for env_name, env in service.environments: env_name => {
+                    branch = env.branch
+                }
+            }
+        }
+    }
 }
