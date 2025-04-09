@@ -3,6 +3,7 @@ services:
     repo: your-org/service1
     environments:
       dev:
+        branch: "dev"
         ec2_host: ec2-12-34-56-78.compute-1.amazonaws.com
         dns:
           - type: A
@@ -12,10 +13,22 @@ services:
           - type: CNAME
             name: service1.test2.hmx86.cloud
             value: external.example.com
+      stage:
+        branch: "stage"
+        ec2_host: ec2-12-34-56-78.compute-1.amazonaws.com
+        dns:
+          - type: A
+            name: stage.service1.test1.hmx86.cloud
+            ttl: 1800
+            value: 3.1.1.2
+          - type: CNAME
+            name: stage.service1.test2.hmx86.cloud
+            value: stage.external.example.com
   - name: service2
     repo: your-org/service2
     environments:
       dev:
+        branch: "dev"
         ec2_host: ec2-12-34-56-78.compute-1.amazonaws.com
         dns:
           - type: A
@@ -23,7 +36,7 @@ services:
             ttl: 1800
             value: 3.1.1.2
           - type: CNAME
-            name: service2.test1.hmx86.cloud
+            name: service2.test2.hmx86.cloud
             value: external.example2.com
           - type: MX
             name: "@"
@@ -32,6 +45,7 @@ services:
   - name: system-agent
     repo: your-org/service3
     environments:
-      main:
+      system:
+        branch: "main"
         ec2_host: ec2-12-34-56-78.compute-1.amazonaws.com
 
