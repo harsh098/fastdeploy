@@ -1,0 +1,31 @@
+services:
+  - name: service1
+    repo: your-org/service1
+    environments:
+      dev:
+        ec2_host: ec2-12-34-56-78.compute-1.amazonaws.com
+        dns:
+          - type: A
+            name: service1.test1.hmx86.cloud
+            ttl: 1800
+            value: 3.1.1.2
+          - type: CNAME
+            name: service1.test2.hmx86.cloud
+            value: external.example.com
+  - name: service2
+    repo: your-org/service2
+    environments:
+      dev:
+        ec2_host: ec2-12-34-56-78.compute-1.amazonaws.com
+        dns:
+          - type: A
+            name: service2.test1.hmx86.cloud
+            ttl: 1800
+            value: 3.1.1.2
+          - type: CNAME
+            name: service2.test1.hmx86.cloud
+            value: external.example2.com
+          - type: MX
+            name: "@"
+            value: mailserver.examplemailer.com
+            priority: 10
