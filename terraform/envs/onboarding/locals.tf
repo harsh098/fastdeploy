@@ -1,11 +1,15 @@
 locals {
+  # Flatten DNS records with null-safe access. 
+  # This is because, 
+  # Some services may be internal and not require DNS Settings
+  # This can used to deploy system level components such as agents, system software etc.
   flattened_dns_records = flatten([
     for service_name, service in var.services : [
       for env_name, env in service.environments : [
-        for dns_record in env.dns : {
+        for record in lookup(env, "dns", []) : {
           service     = service_name
           environment = env_name
-          record      = dns_record
+          record      = record
         }
       ]
     ]

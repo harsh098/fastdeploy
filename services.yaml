@@ -29,3 +29,9 @@ services:
             name: "@"
             value: mailserver.examplemailer.com
             priority: 10
+  - name: system-agent
+    repo: your-org/service3
+    environments:
+      main:
+        ec2_host: ec2-12-34-56-78.compute-1.amazonaws.com
+

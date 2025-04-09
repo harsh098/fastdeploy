@@ -1,6 +1,6 @@
 from typing import Dict, List, Optional, Self
 
-from pydantic import BaseModel, Field, model_validator, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 
 class DNSRecord(BaseModel):
@@ -16,7 +16,9 @@ class DNSRecord(BaseModel):
     def priority_should_be_non_null(cls, priority, type):
         for_types = ["MX", "SRV", "URI"]
         if (type in for_types) and (priority is None):
-            raise ValueError(f"Priority cannot be blank for records of type {",".join(for_types)}")
+            raise ValueError(
+                f"Priority cannot be blank for records of type {",".join(for_types)}"
+            )
         return priority
 
     @field_validator("type", mode="after")
@@ -32,11 +34,13 @@ class DNSRecord(BaseModel):
         if type != "A" and not value:
             raise ValueError(f"DNS record of type {type} requires 'value'")
         return value
-    
-    @model_validator(mode='after')
+
+    @model_validator(mode="after")
     def perform_validations(self) -> Self:
         self.value = self.value_required_for_non_a(self.value, self.type)
-        self.priority = self.priority_should_be_non_null(self.priority, self.type)
+        self.priority = self.priority_should_be_non_null(
+            self.priority, self.type
+        )
         return self
 
 

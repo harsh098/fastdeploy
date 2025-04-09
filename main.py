@@ -23,8 +23,9 @@ def build_onboarding_payload(data: ServiceList):
     for svc in data.services:
         output[svc.name] = {}
         for env_name, env_cfg in svc.environments.items():
+            output[svc.name]["environments"] = dict()
+            output[svc.name]["environments"][env_name] = dict()
             if env_cfg.dns:
-                output[svc.name]["environments"] = dict()
                 output[svc.name]["environments"][env_name] = {
                     "dns": [record.model_dump() for record in env_cfg.dns]
                 }
