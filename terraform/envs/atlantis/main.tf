@@ -39,7 +39,7 @@ resource "aws_instance" "atlantis" {
               sudo yum install -y yum-utils
               sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
               sudo yum -y install terraform
-              
+
               # Install Docker
               amazon-linux-extras install docker -y
               systemctl start docker
@@ -52,15 +52,17 @@ resource "aws_instance" "atlantis" {
               unzip atlantis_linux_amd64.zip
               mv atlantis /usr/local/bin/
               useradd --system --home /etc/atlantis --shell /sbin/nologin atlantis
-              mkdir /etc/atlantis
-              chown atlantis:atlantis /etc/atlantis
+              sudo mkdir /etc/atlantis
+              sudo touch /etc/atlantis/config.yaml
+              sudo chown -R atlantis:atlantis /etc/atlantis
+              usermod -a -G atlantis ec2-user
               cat <<EOT >> /etc/systemd/system/atlantis.service
               [Unit]
               Description=Atlantis GitOps Tool
               After=network.target
-
+            
               [Service]
-              ExecStart=/usr/local/bin/atlantis server --port=4141
+              ExecStart=/usr/local/bin/atlantis server --config /etc/atlantis/config.yaml
               User=atlantis
               Group=atlantis
               Restart=always
