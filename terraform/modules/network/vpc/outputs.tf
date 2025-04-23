@@ -49,3 +49,7 @@ output "private_subnet_arns" {
 output "private_subnets_cidr_blocks" {
   value = module.vpc.private_subnets_cidr_blocks
 }
+
+output "vpc_name" {
+  value = local.name
+}

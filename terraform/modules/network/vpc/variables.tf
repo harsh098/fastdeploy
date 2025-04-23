@@ -7,7 +7,6 @@ variable "aws_region" {
 variable "vpc_name" {
   description = "Name of AWS VPC"
   type        = string
-  default     = "default-vpc"
 }
 
 variable "environment" {
@@ -15,8 +14,8 @@ variable "environment" {
   type        = string
 
   validation {
-    condition     = contains(["dev", "qa", "stage", "production", "onboarding"], var.environment)
-    error_message = "Environment must be one of: dev, qa, stage, production, onboarding"
+    condition     = contains(["dev", "qa", "stage", "production", "onboarding", "atlantis"], var.environment)
+    error_message = "Environment must be one of: dev, qa, stage, production, onboarding, atlantis"
   }
 }
 
