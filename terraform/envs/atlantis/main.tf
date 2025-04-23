@@ -35,6 +35,11 @@ resource "aws_instance" "atlantis" {
 
   user_data = <<-EOF
               #!/bin/bash
+              # Install Terraform 
+              sudo yum install -y yum-utils
+              sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+              sudo yum -y install terraform
+              
               # Install Docker
               amazon-linux-extras install docker -y
               systemctl start docker
