@@ -18,7 +18,7 @@ module "sg" {
       to_port     = 4141
       protocol    = "tcp"
       description = "Atlantis Port"
-      cidr_blocks = "10.10.0.0/16"
+      cidr_blocks = "0.0.0.0/0"
     }
   ]
 }
