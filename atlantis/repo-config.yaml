@@ -1,0 +1,6 @@
+repos:
+- id: /.*/
+  branch: /.*/
+  allowed_overrides: [apply_requirements, plan_requirements, import_requirements,  workflow, delete_source_branch_on_merge, repo_locking, repo_locks, custom_policy_check, silence_pr_comments, delete_source_branch_on_merge]
+  allow_custom_workflows: true
+  delete_source_branch_on_merge: true
