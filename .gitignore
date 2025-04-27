@@ -211,3 +211,4 @@ override.tf.json
 terraform.rc
 
 *.pem
+atlantis/*-dec.yaml
