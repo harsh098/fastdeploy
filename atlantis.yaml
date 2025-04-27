@@ -1,0 +1,49 @@
+version: 3
+parallel_plan: true
+parallel_apply: true
+
+projects:
+- name: dev-env
+  branch: /main/
+  dir: ./terraform/envs/dev
+  delete_source_branch_on_merge: true
+  repo_locks:
+    mode: on_plan
+  autoplan:
+    when_modified: ["*.tf", "*.tfvars", "../../modules/**/*.tf"]
+    enabled: true
+    plan_requirements: [mergeable, approved, undiverged]
+    apply_requirements: [mergeable, approved, undiverged]
+    import_requirements: [mergeable, approved, undiverged]
+    silence_pr_comments: ["apply"]
+    execution_order_group: 1
+
+- name: prod-env
+  branch: /main/
+  dir: ./terraform/envs/prod
+  delete_source_branch_on_merge: true
+  repo_locks:
+    mode: on_plan
+  autoplan:
+    when_modified: ["*.tf", "*.tfvars", "../../modules/**/*.tf"]
+    enabled: true
+    plan_requirements: [approved]
+    apply_requirements: [approved]
+    import_requirements: [approved]
+    silence_pr_comments: ["apply"]
+    execution_order_group: 2
+
+- name: stage-env
+  branch: /main/
+  dir: ./terraform/envs/stage
+  delete_source_branch_on_merge: true
+  repo_locks:
+    mode: on_plan
+  autoplan:
+    when_modified: ["*.tf", "*.tfvars", "../../modules/**/*.tf"]
+    enabled: true
+    plan_requirements: [mergeable, approved, undiverged]
+    apply_requirements: [mergeable, approved, undiverged]
+    import_requirements: [mergeable, approved, undiverged]
+    silence_pr_comments: ["apply"]
+    execution_order_group: 3
