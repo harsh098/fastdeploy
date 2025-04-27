@@ -12,11 +12,11 @@ projects:
   autoplan:
     when_modified: ["*.tf", "*.tfvars", "../../modules/**/*.tf"]
     enabled: true
-    plan_requirements: [mergeable, approved, undiverged]
-    apply_requirements: [mergeable, approved, undiverged]
-    import_requirements: [mergeable, approved, undiverged]
-    silence_pr_comments: ["apply"]
-    execution_order_group: 1
+  plan_requirements: [mergeable, approved, undiverged]
+  apply_requirements: [mergeable, approved, undiverged]
+  import_requirements: [mergeable, approved, undiverged]
+  silence_pr_comments: ["apply"]
+  execution_order_group: 1
 
 - name: prod-env
   branch: /main/
@@ -27,11 +27,11 @@ projects:
   autoplan:
     when_modified: ["*.tf", "*.tfvars", "../../modules/**/*.tf"]
     enabled: true
-    plan_requirements: [approved]
-    apply_requirements: [approved]
-    import_requirements: [approved]
-    silence_pr_comments: ["apply"]
-    execution_order_group: 2
+  plan_requirements: [approved]
+  apply_requirements: [approved]
+  import_requirements: [approved]
+  silence_pr_comments: ["apply"]
+  execution_order_group: 2
 
 - name: stage-env
   branch: /main/
@@ -42,8 +42,8 @@ projects:
   autoplan:
     when_modified: ["*.tf", "*.tfvars", "../../modules/**/*.tf"]
     enabled: true
-    plan_requirements: [mergeable, approved, undiverged]
-    apply_requirements: [mergeable, approved, undiverged]
-    import_requirements: [mergeable, approved, undiverged]
-    silence_pr_comments: ["apply"]
-    execution_order_group: 3
+  plan_requirements: [mergeable, approved, undiverged]
+  apply_requirements: [mergeable, approved, undiverged]
+  import_requirements: [mergeable, approved, undiverged]
+  silence_pr_comments: ["apply"]
+  execution_order_group: 3
