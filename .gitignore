@@ -188,6 +188,12 @@ crash.*.log
 # to change depending on the environment.
 *.tfvars
 *.tfvars.json
+!terraform/envs/dev/dev.auto.tfvars
+!terraform/envs/prod/prod.auto.tfvars
+!terraform/envs/stage/stage.auto.tfvars
+!terraform/envs/onboarding/onboarding.auto.tfvars
+!terraform/envs/common/common.auto.tfvars
+!terraform/envs/atlantis/atlantis.auto.tfvars
 
 # Ignore override files as they are usually used to override resources locally and so
 # are not checked in
